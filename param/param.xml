@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+
+<opencv_storage>
+
+    <!-- 图像参数 -->
+    <!-- MV的最大分辨率为640*480，DH的最大分辨率为1280*960-->
+    <!-- 建议曝光参数：MV800，DH1600-->
+    <FRAME_WIDTH>640</FRAME_WIDTH>
+    <FRAME_HEIGHT>480</FRAME_HEIGHT>
+    <EXPOSURE_TIME>1600</EXPOSURE_TIME>
+
+    <!-- 是否使用串口，1 是, 0 否 -->
+    <USE_SERIAL>0</USE_SERIAL>
+    <!-- 是否使用CAN，0 使用 CAN0, 1 使用 CAN1, 2 不使用 CAN -->
+    <USE_CAN>2</USE_CAN>
+
+    <!-- 是否将调试信息打印在终端上, 1 是, 0 否 -->
+    <DEBUG_INFO>0</DEBUG_INFO>
+    
+    <workspace name="主工作线程">
+        <!-- 是否显示图像, 1 是, 0 否 -->
+        <SHOW_IMAGE>1</SHOW_IMAGE>
+        <!-- 是否显示滚动条, 1 是, 0 否 -->
+        <!-- 注意：必须在 SHOW_IMAGE=1 的情况下才可开启！ -->
+        <TRACKBAR>0</TRACKBAR>
+        <!-- 是否打印工作时间，是1否0 -->
+        <RUNNING_TIME>0</RUNNING_TIME>
+        <!-- 敌方颜色，0代表从电控读，1是红色，2是蓝色 -->
+        <ENEMY_COLOR>1</ENEMY_COLOR>
+        <!-- 机器人工作模式：0:从电控读, 1:一代自瞄（还未添加）, 2:二代自瞄, 3:小能量机关  4:大能量机关   5:英雄吊射  6:工程取弹 -->
+        <MODE>1</MODE>
+        <!-- 是否使用相机，是1否0 -->
+        <!-- 注意：不使用相机时默认为使用视频传入 -->
+        <!-- 注意：目前更改相机型号，位置在workspace.h -->
+        <USE_CAMERA>0</USE_CAMERA>
+        <!-- 是否在运行代码的同时保存视频，0否1是 -->
+        <!-- 注意：保存视频会使图像接受线程慢10ms左右 -->
+        <SAVE_VIDEO>0</SAVE_VIDEO>
+        <!-- 测试视频输入路径 -->
+        <VIDEO_PATH>"../save/2.avi"</VIDEO_PATH>
+        <!-- 视频保存路径，没有该文件夹时无法保存 -->
+        <VIDEO_SAVED_PATH>"../save/1.avi"</VIDEO_SAVED_PATH>
+    </workspace>
+
+    <armor_detect name="装甲板检测">
+        <!-- 是否使用ROI加速 -->
+        <ROI_ENABLE>1</ROI_ENABLE>
+        <!-- 图像预处理相关参数传入 -->
+        <!-- 源图像灰度阈值 -->
+        <GREY_THRES>20</GREY_THRES>
+        <!-- 通道相减图像灰度阈值 -->
+        <SUBTRACT_THRES>40</SUBTRACT_THRES>
+        <!-- 算子核大小 -->
+        <KERNEL_SIZE>2</KERNEL_SIZE>
+        <!-- 伽马矫正常系数 -->
+        <GAMMA_C>1.0</GAMMA_C>
+        <!-- 伽马矫正变量 -->
+        <GAMMA_G>2.2</GAMMA_G>
+        <!-- 伽马矫正灰度阈值 -->
+        <GAMMA_THRES>30</GAMMA_THRES>
+
+        <!-- 装甲板筛选限定条件相关参数传入 -->
+        <!-- 轮廓被视为灯条的最小面积 -->
+        <MIN_LIGHTBAR_AREA>20.0</MIN_LIGHTBAR_AREA>
+        <!-- 装甲板宽高比下限 -->
+        <MIN_ASPECT_RATIO>2.0</MIN_ASPECT_RATIO>
+        <!-- 装甲板宽高比上限 -->
+        <MAX_ASPECT_RATIO>6.0</MAX_ASPECT_RATIO>
+        <!-- 灯条长度比下限 -->
+        <MIN_LENGTH_RATIO>0.5</MIN_LENGTH_RATIO>
+        <!-- 灯条长度比上限 -->
+        <MAX_LENGTH_RATIO>2.0</MAX_LENGTH_RATIO>
+        <!-- 灯条倾斜度之差上限 -->
+        <MAX_LIGHTBAR_DELTA>20.0</MAX_LIGHTBAR_DELTA>
+        <!-- 装甲板倾斜度上限 -->
+        <MAX_ARMOR_ANGLE>30.0</MAX_ARMOR_ANGLE>
+        <!-- 装甲板和灯条倾斜度之差上限 -->
+        <MAX_ARMOR_LIGHTBAR_DELTA>20.0</MAX_ARMOR_LIGHTBAR_DELTA>
+
+        <!-- 最大预选数量相关参数传入 -->
+        <!-- 每帧送进分类器的候选装甲板的最大数量 -->
+        <MAX_CANDIDATE_NUM>1</MAX_CANDIDATE_NUM>
+    </armor_detect>
+
+    <energy name="能量机关参数" id="debug">
+        <!--筛选能量板-->
+        <MIN_ENERGY_AREA name="能量板最小面积">200</MIN_ENERGY_AREA>
+        <MAX_ENERGY_AREA>400</MAX_ENERGY_AREA>
+        <MIN_ENERGY_RATIO>1.0</MIN_ENERGY_RATIO>
+        <MAX_ENERGY_RATIO>2.3</MAX_ENERGY_RATIO>
+        <!--筛选扇叶-->
+        <MIN_FAN_AREA>1000</MIN_FAN_AREA>
+        <MAX_FAN_AREA>1500</MAX_FAN_AREA>
+        <MIN_FAN_RATIO>1.7</MIN_FAN_RATIO>
+        <MAX_FAN_RATIO>3.0</MAX_FAN_RATIO>
+        <!--筛选中心R-->
+        <MIN_R_AREA>60</MIN_R_AREA>
+        <MAX_R_AREA>100</MAX_R_AREA>
+        <!--能量板真实尺寸-->
+        <ENERGY_HALF_LENGTH>135.0</ENERGY_HALF_LENGTH>
+        <ENERGY_HALF_WIDTH>65.0</ENERGY_HALF_WIDTH>
+        <!--中心R外接矩形真实尺寸-->
+        <R_HALF_LENGTH>37.476659</R_HALF_LENGTH>
+        <R_HALF_WIDTH>37.476659</R_HALF_WIDTH>
+        <EXP name="精度控制">0.5</EXP>
+        <RADIUS name="半径的像素大小">75.0</RADIUS>
+        <ROI_SIZE>40.0</ROI_SIZE>
+    </energy>
+    <!--<energy name="能量机关参数" id="release">-->
+    <!--    &lt;!&ndash;筛选能量板&ndash;&gt;-->
+    <!--    <MIN_ENERGY_AREA name="能量板最小面积">200</MIN_ENERGY_AREA>-->
+    <!--    <MAX_ENERGY_AREA>700</MAX_ENERGY_AREA>-->
+    <!--    <MIN_ENERGY_RATIO>1.0</MIN_ENERGY_RATIO>-->
+    <!--    <MAX_ENERGY_RATIO>2.5</MAX_ENERGY_RATIO>-->
+    <!--    &lt;!&ndash;筛选扇叶&ndash;&gt;-->
+    <!--    <MIN_FAN_AREA>1800</MIN_FAN_AREA>-->
+    <!--    <MAX_FAN_AREA>3600</MAX_FAN_AREA>-->
+    <!--    <MIN_FAN_RATIO>1.5</MIN_FAN_RATIO>-->
+    <!--    <MAX_FAN_RATIO>3.0</MAX_FAN_RATIO>-->
+    <!--    &lt;!&ndash;筛选中心R&ndash;&gt;-->
+    <!--    <MIN_R_AREA>60</MIN_R_AREA>-->
+    <!--    <MAX_R_AREA>500</MAX_R_AREA>-->
+    <!--    &lt;!&ndash;能量板真实尺寸&ndash;&gt;-->
+    <!--    <ENERGY_HALF_LENGTH>135.0</ENERGY_HALF_LENGTH>-->
+    <!--    <ENERGY_HALF_WIDTH>65.0</ENERGY_HALF_WIDTH>-->
+    <!--    &lt;!&ndash;中心R外接矩形真实尺寸&ndash;&gt;-->
+    <!--    <R_HALF_LENGTH>37.476659</R_HALF_LENGTH>-->
+    <!--    <R_HALF_WIDTH>37.476659</R_HALF_WIDTH>-->
+    <!--    <EXP name="精度控制">0.5</EXP>-->
+    <!--    <RADIUS name="半径的像素大小">110.0</RADIUS>-->
+    <!--    <ROI_SIZE>50.0</ROI_SIZE>-->
+    <!--</energy>-->
+
+    <!-- 串口模块，是否打印发送信息，是1否0 -->
+    <!-- <DEBUG_INFO>1</DEBUG_INFO> -->
+
+    <!-- 矩阵参数 -->
+    <camera_matrix type_id="opencv-matrix">
+        <rows>3</rows>
+        <cols>3</cols>
+        <dt>d</dt>
+        <data>
+            1.056742254203854e+03 0.0 3.216996196361246e+02
+            0.0 1.057034560833262e+03 2.342644483036798e+02
+            0.0 0.0 1.0
+        </data>
+    </camera_matrix>
+
+    <distortion_coeff type_id="opencv-matrix">
+        <rows>5</rows>
+        <cols>1</cols>
+        <dt>d</dt>
+        <data>
+            -0.115494939836834 0.338129558319302 0.0 0.0 1.0
+        </data>
+    </distortion_coeff>
+
+</opencv_storage>

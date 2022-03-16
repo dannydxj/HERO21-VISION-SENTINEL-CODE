@@ -1,0 +1,7 @@
+classes=6
+train  = /home/luzhan/My-Project/RM2020/main-frame/src/armor_detect/classifier/darknet/data/train.list
+valid  = /home/luzhan/My-Project/RM2020/main-frame/src/armor_detect/classifier/darknet/data/test.list
+backup = /home/luzhan/My-Project/RM2020/main-frame/src/armor_detect/classifier/darknet/backup
+labels = /home/luzhan/My-Project/RM2020/main-frame/src/armor_detect/classifier/darknet/data/labels.list
+names  = /home/luzhan/My-Project/RM2020/main-frame/src/armor_detect/classifier/darknet/data/names.list
+top=1
